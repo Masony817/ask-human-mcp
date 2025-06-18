@@ -34,7 +34,7 @@ from typing import Dict, Optional, Set
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
@@ -955,7 +955,7 @@ async def run_stdio_mode(server: AskHumanServer):
     server.start_watching()
 
     try:
-        await server.mcp.run()
+        await server.mcp.run_async()
     except KeyboardInterrupt:
         logger.info("Received keyboard interrupt")
     finally:
